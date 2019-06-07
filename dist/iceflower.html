@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <!-- 前期频繁更新，清空一下缓存 -->
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .bg {
+            background: url(./bg.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+            background-size: 400% 400%;
+            -webkit-animation: Gradient 15s ease infinite;
+            -moz-animation: Gradient 15s ease infinite;
+            animation: Gradient 15s ease infinite; */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        .demo {
+            width: 80vw;
+            background: rgba(0,0,0,0.5);
+            color: #e1e1e1;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 40px auto;
+        }
+        .detail {
+            white-space: pre-wrap;
+            font-size: 16px;
+        }
+        .demo-btn {
+            width: 100px;
+            margin-right: 25px;
+            outline: none;
+            color: white;
+            border: 1px solid white;
+            background: transparent;
+            padding: 6px 30px;
+            border-radius: 5px;
+            transition: all 0.25s;
+        }
+        .demo-btn:hover {
+            background: white;
+            color: #555;
+        }
+        pre {
+            background: rgba(255,255,255,0.7) !important;
+        }
+        code {
+            background: transparent !important;
+            color: white;
+            border-left: 3px solid white;
+            border-radius: 0px;
+        }
+        a.demo-btn {
+            display: block;
+            margin-top: 15px;
+            padding: 7px 15px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        a.demo-btn:visited {
+            color: white !important;
+        }
+
+
+        @-webkit-keyframes Gradient {
+            0% {
+                background-position: 0% 50%
+            }
+            50% {
+                background-position: 100% 50%
+            }
+            100% {
+                background-position: 0% 50%
+            }
+        }
+
+        @-moz-keyframes Gradient {
+            0% {
+                background-position: 0% 50%
+            }
+            50% {
+                background-position: 100% 50%
+            }
+            100% {
+                background-position: 0% 50%
+            }
+        }
+
+        @keyframes Gradient {
+            0% {
+                background-position: 0% 50%
+            }
+            50% {
+                background-position: 100% 50%
+            }
+            100% {
+                background-position: 0% 50%
+            }
+        }
+
+    </style>
+</head>
+
+
+
+
+<body>
+<section class="bg"></section>
+<!-- 下载链接 -->
+<div class="demo">
+    <h3>下载链接</h3>
+    <hr>
+    <pre>
+author: iceflower
+date:   2018-10-12
+usefor: 无需引用额外的css,html乱七八糟的东西, 爽YY
+    </pre>
+    <a class="demo-btn" href="./iceflower.js" download="iceflower.js" charset="utf-8">download</a>
+</div>
+
+
+<!-- 弹窗 -->
+<div class="demo">
+    <h3>iceflower.alert <span>弹窗</span></h3>
+    <hr>
+    <pre>
+@Params 传入的参数是一个对象 Object
+{
+    text: '提示文字' String,
+    confirmBtnText: '确认按钮文字' String,
+    cancelBtnText: '取消按钮文字' String,
+    callback: 确认按钮的回调函数 Function,
+    width: 不传参的话，默认72vw String '290px',
+    color: 默认蓝色，你可以传入任意的颜色, String '#e1e1e1', 'orange'
+    zIndex: 默认3100，当你需要更高的时候可以调高一点, number
+    type: 'ios' 或者不填，填了瞬间逼格高一倍
+    colorType: 'danger', 'success', 'warning'， 文字控制常用的三种颜色
+}
+    </pre>
+    <div class="demo-show">
+        <button class="demo-btn" onclick="demo1()">primary</button>
+        <code>
+            iceflower.alert({
+                text: '我是小可爱'
+            })
+        </code>
+        <br><br>
+        <button class="demo-btn" onclick="demo2()">danger</button>
+        <code>
+            iceflower.alert({
+                text: '我是小可爱',
+                colorType: 'danger'
+            })
+        </code>
+        <br><br>
+        <button class="demo-btn" onclick="demo3()">ios</button>
+        <code>
+            iceflower.alert({
+                text: '我是小可爱',
+                type: 'ios',
+                callback: function() {
+                    alert('这是一个回调函数');
+                }
+            })
+        </code>
+        <br><br>
+        <button class="demo-btn" onclick="alertWithCancel()">cancel</button>
+        <code>
+            iceflower.alert({
+                text: '我是小可爱',
+                callback: function() {
+                    alert('这是一个回调函数');
+                },
+                cancel: true
+            })
+        </code>
+    </div>
+</div>
+
+
+<!-- 加载 -->
+<div class="demo">
+    <h3>iceflower.loading <span>加载</span></h3>
+    <hr>
+    <pre>
+弹出一个loading
+@Params is a Object 
+{
+    text: '提示文字',
+    color: 默认白色，你可以传入任意的颜色
+    zIndex: 默认3100，当你需要更高的时候可以调高一点 number,
+    type: 'white' //白色背景的loading
+}
+    </pre>
+    <div class="demo-show">
+        <button class="demo-btn" onclick="demo4()">loading</button>
+        <code>
+            iceflower.loading()
+        </code>
+        <br><br>
+        <button class="demo-btn" onclick="demo5()">white</button>
+        <code>
+            iceflower.loading({type: 'white'})
+        </code>
+        <button class="demo-btn" onclick="demo6()">little</button>
+        <code>
+            iceflower.loading({size: 'little'})
+        </code>
+    </div>
+</div>
+
+<!-- 关闭加载 -->
+<div class="demo">
+    <h3>iceflower.closeLoading <span>关闭加载</span></h3>
+    <hr>
+    <pre>
+关闭所有loading
+不用传参
+    </pre>
+    <div class="demo-show">
+        <code>
+            iceflower.closeloading()
+        </code>
+    </div>
+</div>
+
+<!-- 工具和验证 -->
+<div class="demo">
+    <h3>工具和验证</h3>
+    <hr>
+    <pre>
+快捷帮元素添加css样式
+var el = document.getElementById('flower');
+iceflower.addStyle(el, {
+    width: '100px',
+    height: '200px'
+});
+    </pre>
+    <pre>
+动态添加css代码到样式表
+iceflower.insertCSS('.demo { color: orange; animation: lalaMove }');
+    </pre>
+    <pre>
+得到一个两数之间的随机整数，包括两个数在内
+var num = iceflower.getRandomNum(1,29);
+    </pre>
+    <pre>
+获取页面传参http://www.iceflower29.xyz?name=cheer&id=290的值
+var name = iceflower.urlQuery('name');    //cheer
+    </pre>
+    <pre>
+判断是pc端浏览器还是移动端浏览器
+返回 1 pc端
+返回 0 移动端
+var bool = iceflower.checkBrowser();
+    </pre>
+    <pre>
+判断手机号码是否正确
+对返回1
+错返回0
+var bool = iceflower.checkMobile('13760966060');
+    </pre>
+</div>
+
+
+<!-- 微信便捷 -->
+<div class="demo">
+    <h3>iceflower.wxShare 微信分享</h3>
+    <hr>
+    <pre>
+iceflower.wxShare({
+    appId: '公众号唯一appId',
+    url: '要分享的链接',
+    apiTicket: 服务器获取 jsapi_ticket 的url, 
+    title: '这是分享的标题',
+    desc: '分享给朋友的描述',
+    imgUrl: '分享时显示的图片，绝对地址',
+    success: function() {
+        console.log('分享成功的回调函数');
+    }
+});
+    </pre>
+</div>
+
+<div class="demo">
+    <h3>iceflower.getWechatAuthUrl 微信公众号授权跳转的链接</h3>
+    <hr>
+    <pre>
+@params String url    为授权后的重定向url
+@params String appId  公众号唯一标识
+var url = iceflower.getWechatAuthUrl(url, appId);
+    </pre>
+</div>
+        
+
+
+
+<script src="./iceflower.js?version=1" type="text/javascript"></script>
+<script>
+    iceflower.wxShare({
+        appId: 'wxacdebfe68208eec4',
+        url: 'http://weixin.kaoyaoshi.net/iceflower/wx/iceflower.html',
+        title: '就是帅',
+        desc: '这是内容，不知道写什么',
+        imgUrl: 'http://weixin.kaoyaoshi.net/act/passrate/static/share-logo.jpg',
+        success: function() {
+            iceflower.alert({text: '我就是小可爱'});
+        }
+    });
+</script>
+
+<script>
+var demo1 = function() {
+    iceflower.alert({
+        text: '我是小可爱'
+    })
+}
+var demo2 = function() {
+    iceflower.alert({
+        text: '我是小可爱',
+        colorType: 'danger'
+    })
+}
+var demo3 = function() {
+    iceflower.alert({
+        text: '我是小可爱',
+        type: 'ios',
+        callback: function() {
+            alert('这是一个回调函数');
+        }
+    })
+}
+var demo4 = function() {
+    iceflower.loading();
+    setTimeout(function() {
+        iceflower.closeLoading();
+    }, 2000);
+}
+
+var alertWithCancel = function() {
+    iceflower.alert({
+        text: '有cancel按钮',
+        cancel: true,
+        callback: function() {
+            alert('这是一个回调函数');
+        }
+    })
+}
+
+
+var demo5 = function() {
+    iceflower.loading({type: 'white'});
+    setTimeout(function() {
+        iceflower.closeLoading();
+    }, 2000);
+}
+
+var demo6 = function() {
+    iceflower.loading({size: 'little'});
+    setTimeout(function() {
+        iceflower.closeLoading();
+    }, 2000);
+}
+
+</script>
+</body>
+
+</html>

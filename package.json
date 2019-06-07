@@ -1,0 +1,21 @@
+{
+  "name": "iceflower",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "weixin-js-sdk": "^1.3.2"
+  },
+  "devDependencies": {
+    "html-loader": "^0.5.5",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  }
+}

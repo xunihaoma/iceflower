@@ -8,9 +8,11 @@ var addStyle = require('./unit/addStyle.js');
 var getRandomNum = require('./unit/getRandomNum.js');
 //UI
 var alert = require('./ui/alert.js');
+var toast = require('./ui/toast.js');
 // var carousel = require('./ui/carousel.js');
 var loading = require('./ui/loading.js');
 var closeLoading = require('./ui/closeLoading.js');
+
 //WeChat
 var getWechatAuthUrl = require('./wechat/getWechatAuthUrl.js');
 var wxShare = require('./wechat/wxShare.js');
@@ -29,6 +31,7 @@ iceflower.insertCSS = insertCSS;
 iceflower.addStyle = addStyle;
 iceflower.getRandomNum = getRandomNum;
 iceflower.alert = alert;
+iceflower.toast = toast;
 // iceflower.carousel = carousel;
 iceflower.loading = loading;
 iceflower.closeLoading = closeLoading;

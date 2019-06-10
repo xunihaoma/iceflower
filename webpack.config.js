@@ -5,7 +5,7 @@ module.exports = {
     entry: './src/main.js',
     output: {
         filename: 'iceflower.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'demo')
     },
     module: {
         rules: [{

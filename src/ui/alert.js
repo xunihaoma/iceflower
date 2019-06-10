@@ -64,7 +64,8 @@ var alert =  function (object) {
 
 
     //添加一个@keyFrames
-    insertCSS( '@keyframes iceflower-appear-from-bottom { 0% {transform:translate(-50%, -10%);opacity:0;} 100% {transform:translate(-50%, -50%);opacity:1;} }' );
+    insertCSS( '@keyframes iceflower-appear-from-bottom { 0% {transform:translate(-50%, -10%);opacity:1;} 100% {transform:translate(-50%, -50%);opacity:1;} }' );
+    insertCSS( '@keyframes iceflower-alert-bg-appear { 0% {opacity:0;} 100% {opacity:1;} }' );
 
 
     var divWarp = document.createElement('div');
@@ -76,7 +77,8 @@ var alert =  function (object) {
         left: 0,
         zIndex: Number(object.zIndex) || 3100,
         boxSizing: 'border-box',
-        background: typeBg
+        background: typeBg,
+        animation: 'iceflower-alert-bg-appear 0.15s ease-out',
     });
     divWarp.setAttribute('class', 'i-love-filter');
     document.body.appendChild(divWarp);
@@ -92,7 +94,7 @@ var alert =  function (object) {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        animation: 'iceflower-appear-from-bottom 0.225s ease-out',
+        animation: 'iceflower-appear-from-bottom 0.4s cubic-bezier(.11,.83,.39,.99)',
         boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
     });
     //如果是移动端

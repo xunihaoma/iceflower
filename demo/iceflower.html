@@ -148,15 +148,18 @@ usefor: 😙无需引用额外的css,html乱七八糟的东西, 爽YY
     <pre>
 @Params 传入的参数是一个对象 Object
 {
-    text:  '提示文字' String,
-    width:  不传参的话，默认72vw String '290px',
-    color:  默认蓝色，你可以传入任意的颜色, String '#e1e1e1', 'orange'
+    text: '提示文字',
+    confirmBtnText: '按钮文字'
+    cancelBtnText: '按钮文字'
+    callback: 回调函数,
+    width: 不传参的话，默认72vw,
+    color: 默认蓝色，你可以传入任意的颜色
     zIndex: 默认3100，当你需要更高的时候可以调高一点, number
-    type:   'ios' 或者不填，填了瞬间逼格高一倍
+    type: 'ios' 或者不填，填了瞬间逼格高一倍
     colorType: 'danger', 'success', 'warning'， 文字控制常用的三种颜色
-    confirmBtnText: '确认按钮文字' String,
-    cancelBtnText:  '取消按钮文字' String,
-    callback: 确认按钮的回调函数 Function,
+    cancel: false, true,
+    cancelCallback: fn,
+    close: false, true   //是否可以手动关闭
 }
     </pre>
     <div class="demo-show">
@@ -192,6 +195,14 @@ usefor: 😙无需引用额外的css,html乱七八糟的东西, 爽YY
                     alert('这是一个回调函数');
                 },
                 cancel: true
+            })
+        </code>
+        <br><br>
+        <button class="demo-btn" onclick="alert5()">close</button>
+        <code>
+            iceflower.alert({
+                text: '我是小可爱',
+                close: true
             })
         </code>
     </div>
@@ -385,6 +396,13 @@ var alertWithCancel = function() {
         callback: function() {
             alert('这是一个回调函数');
         }
+    })
+}
+
+var alert5 = function() {
+    iceflower.alert({
+        text: '我是小可爱',
+        close: true
     })
 }
 

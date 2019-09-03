@@ -5,8 +5,8 @@
  *     text: '提示文字',
  *     color: 默认白色，你可以传入任意的颜色
  *     zIndex: 默认3100，当你需要更高的时候可以调高一点 number,
- *     type: 'white'  //白色背景的loading,
- *     size: 'little'
+ *     type: 'white'  //白色背景的loading,  'none' //隐形的遮盖层什么都没有
+ *     size: 'little' 
  * }
 */
 
@@ -42,6 +42,11 @@ var loading = function (o) {
         background: bgWrapColor
     });
     document.body.appendChild(divWarp);
+
+    if(o.type === 'none') {
+        divWarp.style.background = 'transparent';
+        return;
+    }
 
     var loadingDiv = document.createElement('div');
     addStyle(loadingDiv, {

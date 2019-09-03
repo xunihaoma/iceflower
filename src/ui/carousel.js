@@ -13,7 +13,7 @@ var carousel = function(o) {
     var items = new Array();
     items = document.querySelectorAll(o.items);
     
-    var height = '600px';
+    var height = 'auto';
     if(o.height) {
         height = o.height;
     }

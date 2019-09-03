@@ -83,30 +83,6 @@
         }
 
 
-        @-webkit-keyframes Gradient {
-            0% {
-                background-position: 0% 50%
-            }
-            50% {
-                background-position: 100% 50%
-            }
-            100% {
-                background-position: 0% 50%
-            }
-        }
-
-        @-moz-keyframes Gradient {
-            0% {
-                background-position: 0% 50%
-            }
-            50% {
-                background-position: 100% 50%
-            }
-            100% {
-                background-position: 0% 50%
-            }
-        }
-
         @keyframes Gradient {
             0% {
                 background-position: 0% 50%
@@ -119,6 +95,23 @@
             }
         }
 
+
+        .show-time {
+            animation: showTime 2s cubic-bezier(.13,.7,0,1.05);
+        }
+
+        @keyframes showTime {
+            0% {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
     </style>
 </head>
 
@@ -127,6 +120,8 @@
 
 <body>
 <section class="bg"></section>
+
+
 <!-- 下载链接 -->
 <div class="demo">
     <h3>下载链接</h3>
@@ -354,6 +349,13 @@ iceflower.wxShare({
 var url = iceflower.getWechatAuthUrl(url, appId);
     </pre>
 </div>
+
+
+
+
+
+
+
         
 
 
@@ -362,6 +364,8 @@ var url = iceflower.getWechatAuthUrl(url, appId);
 
 
 <script>
+
+
 var demo1 = function() {
     iceflower.alert({
         text: '我是小可爱'
@@ -423,12 +427,16 @@ var demo6 = function() {
 
 
 var toast1 = function() {
-    iceflower.toast();
+    iceflower.toast({vanish: 20000});
 }
 var toast2 = function() {
     iceflower.toast({text: '🤣🤣🤣<br>我是谁，我在哪鸭？', bgColor: 'rgba(15,174,105,0.3)'});
 }
 
+
+
+
+iceflower.scrollView('.demo', '.show-time');
 
 </script>
 </body>

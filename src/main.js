@@ -12,6 +12,7 @@ var toast = require('./ui/toast.js');
 // var carousel = require('./ui/carousel.js');
 var loading = require('./ui/loading.js');
 var closeLoading = require('./ui/closeLoading.js');
+var scrollView = require('./ui/scrollView.js');
 
 //WeChat
 var getWechatAuthUrl = require('./wechat/getWechatAuthUrl.js');
@@ -35,5 +36,6 @@ iceflower.toast = toast;
 // iceflower.carousel = carousel;
 iceflower.loading = loading;
 iceflower.closeLoading = closeLoading;
+iceflower.scrollView = scrollView;
 iceflower.getWechatAuthUrl = getWechatAuthUrl;
 iceflower.wxShare = wxShare;

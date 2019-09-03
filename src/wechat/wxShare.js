@@ -1,3 +1,4 @@
+  
 /**
  * {
  *      appId: 公众号的唯一appId,
@@ -16,8 +17,6 @@
 
 
 
-//npm install weixin-js-sdk
-window.iceflowerWX = require('weixin-js-sdk');
 // npm install crypto-js
 var sha1 = require('crypto-js/sha1');
 
@@ -35,8 +34,9 @@ var randomString = function(len) {
 
 //微信分享主方法
 var wxShare = function(o) {
-    if (!o) {
-        var o = {};
+    //npm install weixin-js-sdk
+    if(!window.iceflowerWXShare) {
+        window.iceflowerWX = require('weixin-js-sdk');
     }
 
     //WXTicket 就是公众号开发文档中的 jsapi_ticket
@@ -63,8 +63,8 @@ var wxShare = function(o) {
                 window.localStorage.setItem("WXTicket", WXTicket);
                 // 微信分享方法
                 var noncestr = randomString(16);
-                var timestamp = Date.parse(new Date()) / 1000;
-                var url = window.location.href;
+                var timestamp = Date.now();
+                var url = window.location.origin + window.location.pathname + window.location.search;
                 var sha1_signature = sha1("jsapi_ticket=" + WXTicket + "&noncestr=" + noncestr + "&timestamp=" + timestamp + "&url=" + url);
                 iceflowerWX.config({
                     debug: false, 
@@ -119,8 +119,9 @@ var wxShare = function(o) {
                 });
                 iceflowerWX.error(function() {
                     window.localStorage.removeItem("WXTicket");
+                    console.log('分享错误啦');
                     setTimeout(function() {
-                        wxShare();
+                        wxShare(o);
                     }, 10000)
                 });
     
@@ -141,7 +142,6 @@ var wxShare = function(o) {
 
 
 }
-
 
 
 module.exports = wxShare;

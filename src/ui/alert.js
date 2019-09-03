@@ -94,6 +94,7 @@ var alert =  function (object) {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
+        WebkitTransform: 'translate(-50%, -50%)',
         animation: 'iceflower-appear-from-bottom 0.4s cubic-bezier(.11,.83,.39,.99)',
         boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
     });

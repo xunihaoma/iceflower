@@ -51,6 +51,84 @@ var wxShare = function(o) {
 
     var weixinShareUrl = o.url; 
 
+
+    var sharefn = function(JS_WXTicket) {
+
+        // 微信分享方法
+        var noncestr = randomString(16);
+        var timestamp = Date.now();
+        var url = window.location.origin + window.location.pathname + window.location.search;
+        var sha1_signature = sha1("jsapi_ticket=" + JS_WXTicket + "&noncestr=" + noncestr + "&timestamp=" + timestamp + "&url=" + url);
+        iceflowerWX.config({
+            debug: false, 
+            // 必填，公众号的唯一标识
+            appId: o.appId, 
+            timestamp: timestamp, 
+            nonceStr: noncestr, 
+            signature: sha1_signature.toString(), 
+            jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
+        });
+        iceflowerWX.ready(function() {
+            //分享到朋友圈
+            iceflowerWX.onMenuShareTimeline({
+                title: o.title, 
+                link: weixinShareUrl,
+                imgUrl: o.imgUrl, 
+                success: function() {
+                    // 用户确认分享后执行的回调函数
+                    if (o.success && typeof o.success == 'function') {
+                        o.success();
+                    }
+                },
+                cancel: function() {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+            // 分享给朋友
+            iceflowerWX.onMenuShareAppMessage({
+                title: o.title, 
+                desc: o.desc,
+                link: weixinShareUrl, 
+                imgUrl: o.imgUrl, 
+                // 分享类型,music、video或link，不填默认为link
+                type: 'link', 
+                // 如果type是music或video，则要提供数据链接，默认为空
+                dataUrl: '', 
+                success: function() {
+                    // 用户确认分享后执行的回调函数
+                    if (o.success && typeof o.success == 'function') {
+                        o.success();
+                    }
+                    
+                },
+                cancel: function() {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+
+            //暴露一个分享成功的全局变量
+            window.iceflowerWXShare = true;
+
+        });
+        iceflowerWX.error(function() {
+            window.localStorage.removeItem("WXTicket");
+            console.log('分享错误啦');
+            setTimeout(function() {
+                wxShare(o);
+            }, 5000)
+        });
+    }
+
+
+    //单页面二次分享设置不请求后台获取jsapi_ticket
+    if(window.iceflowerWXShare) {
+        sharefn(WXTicket);
+        return;
+    }
+
+
+
+    //第一次异步请求获取jsapi_ticket
     var request = new XMLHttpRequest();
 
     request.onreadystatechange = function() {
@@ -61,71 +139,7 @@ var wxShare = function(o) {
                 var data = JSON.parse(resp);
                 WXTicket = data.respMsg;
                 window.localStorage.setItem("WXTicket", WXTicket);
-                // 微信分享方法
-                var noncestr = randomString(16);
-                var timestamp = Date.now();
-                var url = window.location.origin + window.location.pathname + window.location.search;
-                var sha1_signature = sha1("jsapi_ticket=" + WXTicket + "&noncestr=" + noncestr + "&timestamp=" + timestamp + "&url=" + url);
-                iceflowerWX.config({
-                    debug: false, 
-                    // 必填，公众号的唯一标识
-                    appId: o.appId, 
-                    timestamp: timestamp, 
-                    nonceStr: noncestr, 
-                    signature: sha1_signature.toString(), 
-                    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
-                });
-                iceflowerWX.ready(function() {
-                    //分享到朋友圈
-                    iceflowerWX.onMenuShareTimeline({
-                        title: o.title, 
-                        link: weixinShareUrl,
-                        imgUrl: o.imgUrl, 
-                        success: function() {
-                            // 用户确认分享后执行的回调函数
-                            if (o.success && typeof o.success == 'function') {
-                                o.success();
-                            }
-                        },
-                        cancel: function() {
-                            // 用户取消分享后执行的回调函数
-                        }
-                    });
-                    // 分享给朋友
-                    iceflowerWX.onMenuShareAppMessage({
-                        title: o.title, 
-                        desc: o.desc,
-                        link: weixinShareUrl, 
-                        imgUrl: o.imgUrl, 
-                        // 分享类型,music、video或link，不填默认为link
-                        type: 'link', 
-                        // 如果type是music或video，则要提供数据链接，默认为空
-                        dataUrl: '', 
-                        success: function() {
-                            // 用户确认分享后执行的回调函数
-                            if (o.success && typeof o.success == 'function') {
-                                o.success();
-                            }
-                            
-                        },
-                        cancel: function() {
-                            // 用户取消分享后执行的回调函数
-                        }
-                    });
-
-                    //暴露一个分享成功的全局变量
-                    window.iceflowerWXShare = true;
-
-                });
-                iceflowerWX.error(function() {
-                    window.localStorage.removeItem("WXTicket");
-                    console.log('分享错误啦');
-                    setTimeout(function() {
-                        wxShare(o);
-                    }, 10000)
-                });
-    
-    
+                sharefn(WXTicket);
             } else {
                 // 服务器获取 jsapi_ticket 错误
                 console.log('服务器获取 jsapi_ticket 错误');
@@ -139,7 +153,6 @@ var wxShare = function(o) {
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
     //send的格式是字符串 name=123&lala=2900
     request.send("refreshJsApiTicket=" + ifhaveWXTicket);
-
 
 }
 

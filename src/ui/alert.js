@@ -25,6 +25,11 @@ var checkBrowser = require('../verification/checkBrowser.js');
 var alert =  function (object) {
     var that = this;
 
+    //有iceflower弹窗的时候不再弹了
+    if(document.querySelector('.i-love-filter')) {
+        return;
+    }
+
     if (!object) {
         var object = {};
     }

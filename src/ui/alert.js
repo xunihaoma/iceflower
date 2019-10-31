@@ -73,7 +73,8 @@ var alert =  function (object) {
     insertCSS( '@keyframes iceflower-alert-bg-appear { 0% {opacity:0;} 100% {opacity:1;} }' );
 
     //ios13 暗黑模式
-    insertCSS( '@media (prefers-color-scheme: dark) { .i-love-filter>div { background-color: rgba(29,29,31,0.7) !important; backdrop-filter: saturate(180%) blur(20px) !important;} .i-love-filter>div>p { color: #e9e9e9 !important;} }' );
+    // insertCSS( '@media (prefers-color-scheme: dark) { .i-love-filter>div { background-color: rgba(29,29,31,0.7) !important; backdrop-filter: saturate(180%) blur(20px) !important;} .i-love-filter>div>p { color: #e9e9e9 !important;} }' );
+    insertCSS( '.i-love-filter>div { background-color: #262626 !important;} .i-love-filter>div>p { color: #e9e9e9 !important;}' );
 
 
     var divWarp = document.createElement('div');

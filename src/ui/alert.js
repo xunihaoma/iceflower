@@ -14,6 +14,7 @@
  *      cancel: false, true,
  *      cancelCallback: fn,
  *      close: false, true   //是否可以手动关闭
+ *      still: true          //不可关闭
  * }
 */
 
@@ -73,8 +74,7 @@ var alert =  function (object) {
     insertCSS( '@keyframes iceflower-alert-bg-appear { 0% {opacity:0;} 100% {opacity:1;} }' );
 
     //ios13 暗黑模式
-    // insertCSS( '@media (prefers-color-scheme: dark) { .i-love-filter>div { background-color: rgba(29,29,31,0.7) !important; backdrop-filter: saturate(180%) blur(20px) !important;} .i-love-filter>div>p { color: #e9e9e9 !important;} }' );
-    insertCSS( '.i-love-filter>div { background-color: #262626 !important;} .i-love-filter>div>p { color: #e9e9e9 !important;}' );
+    insertCSS( '@media (prefers-color-scheme: dark) { .i-love-filter>div { background-color: rgba(29,29,31,0.7) !important; backdrop-filter: saturate(180%) blur(20px) !important; -webkit-backdrop-filter: saturate(180%) blur(20px) !important; box-shadow: none !important;} .i-love-filter>div>p { color: #e9e9e9 !important;border-bottom: 1px solid #3b3b3b !important;} }' );
 
 
     var divWarp = document.createElement('div');
@@ -140,6 +140,9 @@ var alert =  function (object) {
     });
     p_text.innerText = object.text ? object.text : '点击确定继续操作';
     divAlert.appendChild(p_text);
+
+    //不可关闭
+    if(object.still) return;
 
     var btn = document.createElement('button');
     addStyle(btn, {

@@ -74,7 +74,7 @@ var alert =  function (object) {
     insertCSS( '@keyframes iceflower-alert-bg-appear { 0% {opacity:0;} 100% {opacity:1;} }' );
 
     //ios13 暗黑模式
-    insertCSS( '@media (prefers-color-scheme: dark) { .i-love-filter>div { background-color: rgba(29,29,31,0.7) !important; backdrop-filter: saturate(180%) blur(20px) !important; -webkit-backdrop-filter: saturate(180%) blur(20px) !important; box-shadow: none !important;} .i-love-filter>div>p { color: #e9e9e9 !important;border-bottom: 1px solid #3b3b3b !important;} }' );
+    insertCSS( '@media (prefers-color-scheme: dark) { .i-love-filter>div { background-color: rgba(29,29,31,0.7) !important; backdrop-filter: saturate(180%) blur(20px) !important; -webkit-backdrop-filter: saturate(180%) blur(20px) !important; box-shadow: none !important;} .i-love-filter>div>p { color: #e9e9e9 !important;border-bottom: 1px solid #3b3b3b !important;} .i-love-filter>div>div button:nth-of-type(2) { border-left: 1px solid #3b3b3b !important;} }' );
 
 
     var divWarp = document.createElement('div');

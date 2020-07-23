@@ -124,7 +124,7 @@ var alert =  function (object) {
         borderRadius: '10px 10px 0 0',
         fontSize: '16px'
     });
-    h3.innerText = o.title || '提示';
+    h3.innerText = object.title || '提示';
     divAlert.appendChild(h3);
 
     var p_text = document.createElement('p');

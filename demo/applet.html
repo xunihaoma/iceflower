@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <style>
+        * {
+            margin: 0;
+        }
+        body,html {
+            height:100%;
+        }
+        body {
+            background: url(./bg.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .btn--1 {
+            width: 50vw;
+            height: 40px;
+            color: white;
+            background: rgba(0,0,0,0.7);
+            line-height: 40px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 15px;
+            display: block;
+            margin: 25px auto;
+        }
+        .btn--2 {
+            width: 50vw;
+            height: 40px;
+            color: white;
+            background: rgba(0,0,0,0.7);
+            line-height: 40px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 15px;
+            display: block;
+            margin: 50px auto;    
+        }
+        .btn--3 {
+            width: 50vw;
+            height: 80px;
+            color: white;
+            background: rgba(0,0,0,0.7);
+            text-align: center;
+            border-radius: 8px;
+            font-size: 15px;
+            display: block;
+            margin: 50px auto;  
+        }
+    </style>
+</head>
+
+
+
+
+<body>
+
+
+<!-- 方法一 在vue项目中使用vue自定义指令的方法唤起小程序 -->
+<div id="app">
+    <div class="btn--1" v-mini-open>方法一 打开小程序</div>
+</div>
+
+
+
+
+<!-- 方法二 使用自定义HTML标签 -->
+<ice-wx-open-mini-program 
+    class="btn--2"
+    username="gh_7c242f557506"
+    path="pages/index/newIndex.html"
+>
+    方法二 打开小程序
+</ice-wx-open-mini-program>
+
+
+
+<!-- 继续 方法二 使用自定义HTML标签 -->
+<ice-wx-open-mini-program 
+    class="btn--3"
+    username="gh_7c242f557506"
+    path="pages/index/newIndex.html"
+>
+    <div>
+        <br>
+        <h3>方法二</h3>
+        <p>默认slot 打开小程序</p>
+    </div>
+</ice-wx-open-mini-program>
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+<script src="./iceflower.js" type="text/javascript"></script>
+
+<script>
+    // 第一步：一定要先注册分享！！！
+    iceflower.wxShare({
+        url: 'http://weixin.kaoyaoshi.net/iceflower/sandbox/daily_practice/enter.html',
+        title: `小萌花花`,
+        desc: '0.0',
+        imgUrl: 'https://img.kaoyaoshi.net//user/head/20191127/101346168_5.png',
+        appId: 'wxacdebfe68208eec4',
+        apiTicket: 'https://kaoyaoshi.rundejy.com/wechat/get_kys_js_api_ticket',
+        success: function () {
+            console.log('分享成功')
+        }
+    });
+
+
+        // html使用Vue
+        window.onload = function() {
+            var app = new Vue({el:'#app'});
+        }
+</script>
+
+
+
+<script>
+    //第二步：唤起小程序，注意只有真机才看到唤起效果，微信开发者工具也不行的
+
+    /**
+     * @ 方法1
+     * 采用vue自定义指令
+     * 先运行iceflower.miniOpen方法，它接受两个参数，作用是注册一个vue自定义指令 v-mini-open
+     * 参数一的Vue 就是 import Vue from 'vue' 的 Vue :)
+     * 参数二是一个对象
+     * 跟着您就可以在你的vue项目中的div元素(一定要用div元素！！！)
+     * 这样写
+     * <div v-mini-open>打开小程序</div>
+    */
+    iceflower.miniOpen(Vue, {
+        username: 'gh_7c242f557506',       //小程序的id
+        path: 'pages/index/newIndex.html'  //跳转的页面(记得在原始跳转地址后加 .html)，还可以pages/index/newIndex.html?lala=coco
+    })
+
+
+
+
+    /**
+     * @ 方法2
+     * 使用自定义HTML标签，可在正常HTML文件，Vue项目，React项目等任意地方使用
+     * 这个方法会自动注册一个HTML自定义标签 <ice-wx-open-mini-program></ice-wx-open-mini-program>
+     * 封装这个标签的原因也是解决微信官方样式难调试的问题，不利于开发和热更新看效果
+     * 但是还是使用起来会比第一个难一点
+    */
+    iceflower.miniComp();
+</script>
+
+
+</body>
+
+</html>

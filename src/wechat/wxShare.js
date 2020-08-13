@@ -66,11 +66,12 @@ var wxShare = function(o) {
             timestamp: timestamp, 
             nonceStr: noncestr, 
             signature: sha1_signature.toString(), 
-            jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
+            jsApiList: ['updateTimelineShareData', 'updateAppMessageShareData'],
+            openTagList: ['wx-open-launch-weapp']
         });
         iceflowerWX.ready(function() {
             //分享到朋友圈
-            iceflowerWX.onMenuShareTimeline({
+            iceflowerWX.updateTimelineShareData({
                 title: o.title, 
                 link: weixinShareUrl,
                 imgUrl: o.imgUrl, 
@@ -79,30 +80,20 @@ var wxShare = function(o) {
                     if (o.success && typeof o.success == 'function') {
                         o.success();
                     }
-                },
-                cancel: function() {
-                    // 用户取消分享后执行的回调函数
                 }
             });
             // 分享给朋友
-            iceflowerWX.onMenuShareAppMessage({
+            iceflowerWX.updateAppMessageShareData({
                 title: o.title, 
                 desc: o.desc,
                 link: weixinShareUrl, 
                 imgUrl: o.imgUrl, 
-                // 分享类型,music、video或link，不填默认为link
-                type: 'link', 
-                // 如果type是music或video，则要提供数据链接，默认为空
-                dataUrl: '', 
                 success: function() {
                     // 用户确认分享后执行的回调函数
                     if (o.success && typeof o.success == 'function') {
                         o.success();
                     }
                     
-                },
-                cancel: function() {
-                    // 用户取消分享后执行的回调函数
                 }
             });
 

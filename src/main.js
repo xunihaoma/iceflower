@@ -17,6 +17,8 @@ var scrollView = require('./ui/scrollView.js');
 //WeChat
 var getWechatAuthUrl = require('./wechat/getWechatAuthUrl.js');
 var wxShare = require('./wechat/wxShare.js');
+var miniOpen = require('./wechat/miniOpen.js');
+var miniComp = require('./wechat/miniComp.js');
 
 window.iceflower = new Object();
 
@@ -39,3 +41,5 @@ iceflower.closeLoading = closeLoading;
 iceflower.scrollView = scrollView;
 iceflower.getWechatAuthUrl = getWechatAuthUrl;
 iceflower.wxShare = wxShare;
+iceflower.miniOpen = miniOpen;
+iceflower.miniComp = miniComp;

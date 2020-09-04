@@ -66,12 +66,12 @@ var wxShare = function(o) {
             timestamp: timestamp, 
             nonceStr: noncestr, 
             signature: sha1_signature.toString(), 
-            jsApiList: ['updateTimelineShareData', 'updateAppMessageShareData'],
+            jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'],
             openTagList: ['wx-open-launch-weapp']
         });
         iceflowerWX.ready(function() {
             //分享到朋友圈
-            iceflowerWX.updateTimelineShareData({
+            iceflowerWX.onMenuShareTimeline({
                 title: o.title, 
                 link: weixinShareUrl,
                 imgUrl: o.imgUrl, 
@@ -83,7 +83,7 @@ var wxShare = function(o) {
                 }
             });
             // 分享给朋友
-            iceflowerWX.updateAppMessageShareData({
+            iceflowerWX.onMenuShareAppMessage({
                 title: o.title, 
                 desc: o.desc,
                 link: weixinShareUrl, 

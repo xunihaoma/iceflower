@@ -67,7 +67,7 @@ var wxShare = function(o) {
             nonceStr: noncestr, 
             signature: sha1_signature.toString(), 
             jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'],
-            openTagList: ['wx-open-launch-weapp']
+            openTagList: ['wx-open-launch-weapp', 'wx-open-launch-app']
         });
         iceflowerWX.ready(function() {
             //分享到朋友圈

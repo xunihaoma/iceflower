@@ -19,6 +19,7 @@ var getWechatAuthUrl = require('./wechat/getWechatAuthUrl.js');
 var wxShare = require('./wechat/wxShare.js');
 var miniOpen = require('./wechat/miniOpen.js');
 var miniComp = require('./wechat/miniComp.js');
+var appOpen = require('./wechat/appOpen.js');
 
 window.iceflower = new Object();
 
@@ -43,3 +44,4 @@ iceflower.getWechatAuthUrl = getWechatAuthUrl;
 iceflower.wxShare = wxShare;
 iceflower.miniOpen = miniOpen;
 iceflower.miniComp = miniComp;
+iceflower.appOpen = appOpen;

@@ -6,6 +6,7 @@ var appOpen = function(Vue, object) {
 
     if(object.appid == undefined) throw '请传入参数 appid';
     if(object.extinfo == undefined) object.extinfo = 'iceflower';
+    if(object.errorCallBack == undefined) object.errorCallBack = function() { return 0; };
 
     Vue.directive('app-open', {
         inserted: function(el) {
@@ -39,7 +40,7 @@ var appOpen = function(Vue, object) {
             div.style.overflow = 'hidden';
             div.style.background = 'transparent';
             div.innerHTML = `
-                <wx-open-launch-app appid="${object.appid}" extinfo="${object.extinfo}">
+                <wx-open-launch-app appid="${object.appid}" extinfo="${object.extinfo}" id="iceflowerOpenApp29">
                     <template>
                         <div style="background: transparent; padding:5000px"></div> 
                     </template>
@@ -47,6 +48,15 @@ var appOpen = function(Vue, object) {
             `;
             el.appendChild(div);
 
+            var openAppBtn = document.getElementById('iceflowerOpenApp29');
+
+            openAppBtn.addEventListener('launch', function(e) {
+                console.log('成功唤起app啦');
+            });
+
+            openAppBtn.addEventListener('error', function(e) {
+                object.errorCallBack(e.detail);
+            })
         }
     })
 }

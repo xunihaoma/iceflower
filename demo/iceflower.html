@@ -200,6 +200,20 @@ usefor: 😙无需引用额外的css,html乱七八糟的东西, 爽YY
                 close: true
             })
         </code>
+        <br><br>
+        <button class="demo-btn" onclick="alert6()">input</button>
+        <code>
+            iceflower.alert({
+                input: true,
+                cancel: true,
+                inputType: 'text',
+                inputPlaceholder: '随便写吧',
+                colorType: 'warning',
+                callback: function(inputValue) {
+                    console.log(inputValue);
+                }
+            })
+        </code>
     </div>
 </div>
 
@@ -409,6 +423,20 @@ var alert5 = function() {
         close: true
     })
 }
+
+var alert6 = function() {
+    iceflower.alert({
+        input: true,
+        cancel: true,
+        inputType: 'text',
+        inputPlaceholder: '随便写吧',
+        colorType: 'warning',
+        callback: function(inputValue) {
+            console.log(inputValue);
+        }
+    })
+}
+
 
 
 var demo5 = function() {

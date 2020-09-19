@@ -75,7 +75,7 @@ var alert =  function (object) {
     insertCSS( '@keyframes iceflower-alert-bg-appear { 0% {opacity:0;} 100% {opacity:1;} }' );
 
     //ios13 暗黑模式
-    insertCSS( '@media (prefers-color-scheme: dark) { .i-love-filter>div { background-color: rgba(29,29,31,0.7) !important; backdrop-filter: saturate(180%) blur(20px) !important; -webkit-backdrop-filter: saturate(180%) blur(20px) !important; box-shadow: none !important;} .i-love-filter>div>p { color: #e9e9e9 !important;border-bottom: 1px solid #3b3b3b !important;} .i-love-filter>div>div button:nth-of-type(2) { border-left: 1px solid #3b3b3b !important;} }' );
+    // insertCSS( '@media (prefers-color-scheme: dark) { .i-love-filter>div { background-color: rgba(29,29,31,0.7) !important; backdrop-filter: saturate(180%) blur(20px) !important; -webkit-backdrop-filter: saturate(180%) blur(20px) !important; box-shadow: none !important;} .i-love-filter>div>p { color: #e9e9e9 !important;border-bottom: 1px solid #3b3b3b !important;} .i-love-filter>div>div button:nth-of-type(2) { border-left: 1px solid #3b3b3b !important;} }' );
 
 
     var divWarp = document.createElement('div');
@@ -139,11 +139,43 @@ var alert =  function (object) {
         margin: '0',
         borderBottom: '1px solid rgba(30,55,64,0.1)'
     });
-    p_text.innerText = object.text ? object.text : '点击确定继续操作';
+    p_text.innerHTML = object.text ? object.text : '点击确定继续操作';
     divAlert.appendChild(p_text);
 
     //不可关闭
-    if(object.still) return;
+    if(object.still) {
+        // insertCSS( '@media (prefers-color-scheme: dark) { body .i-love-filter>div>p { border-bottom: none !important;} }' );
+        addStyle(p_text, {
+            paddingBottom: '30px',
+            borderBottom: 'none !important'
+        })
+        return;
+    }
+
+    //输入框
+    if(object.input) {
+        insertCSS( '.i-love-filter>div>p>input::placeholder { color: #bbb; font-size: 13px; }' );
+        var input = document.createElement('input');
+        addStyle(input, {
+            width: '95%',
+            height: '40px',
+            border: '1px solid #eee',
+            /* 去除ios端输入框的内阴影 */
+            webkitAppearance: 'none',
+            borderRadius: '4px',
+            display: 'block',
+            margin: '10px auto -5px auto',
+            background: '#f7f7f7',
+            outline: 'none',
+            textAlign: 'center',
+            color: object.color || color
+        });
+        input.setAttribute('type', object.inputType || 'text');
+        input.setAttribute('placeholder', object.inputPlaceholder || '请输入');
+        input.setAttribute('autofocus', 'autofocus');
+        p_text.appendChild(input);
+    }
+
 
     var btn = document.createElement('button');
     addStyle(btn, {
@@ -165,7 +197,12 @@ var alert =  function (object) {
         document.body.removeChild(divWarp);
         document.body.classList.remove('iceflower-love-to-blur');
         if (object.callback && typeof object.callback == 'function') {
-            object.callback();
+            if(object.input) {
+                object.callback(input.value);
+            }else {
+                object.callback();
+            }
+            
         }
     });
 

@@ -40,7 +40,7 @@ var appOpen = function(Vue, object) {
             div.style.overflow = 'hidden';
             div.style.background = 'transparent';
             div.innerHTML = `
-                <wx-open-launch-app appid="${object.appid}" extinfo="${object.extinfo}" id="iceflowerOpenApp29">
+                <wx-open-launch-app appid="${object.appid}" extinfo='${object.extinfo}' id="iceflowerOpenApp29">
                     <template>
                         <div style="background: transparent; padding:5000px"></div> 
                     </template>

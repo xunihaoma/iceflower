@@ -6,6 +6,7 @@
  *      text: '提示文字',
  *      confirmBtnText: '按钮文字'
  *      cancelBtnText: '按钮文字'
+ *      cancelBtnColor: '取消健颜色'
  *      callback: 回调函数,
  *      width: 不传参的话，默认72vw,
  *      color: 默认蓝色，你可以传入任意的颜色
@@ -220,7 +221,7 @@ var alert =  function (object) {
             border: 'none',
             borderRadius: '0 0 0 10px',
             fontSize: '15px',
-            color: '#999',
+            color: object.cancelBtnColor || '#999',
             cursor: 'pointer',
             background: 'transparent'
         });
